@@ -35,9 +35,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int _counter = 0;
 
+  // Menambah angka counter
   void _incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  // Mengurangi angka counter
+  void _decrementCounter() {
+    setState(() {
+      if (_counter > 0) {
+        _counter--;
+      }
+    });
+  }
+
+  // Mereset angka counter ke 0
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
     });
   }
 
@@ -50,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header aplikasi dengan Nama dan NIM
+              // Header aplikasi dengan Nama dan NIM dari variabel
               Container(
                 padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
@@ -82,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
               const SizedBox(height: 40),
 
-              // Tampilan angka counter
+              // Tampilan angka counter bentuk lingkaran
               Center(
                 child: Container(
                   width: 180,
@@ -116,6 +133,46 @@ class _MyHomePageState extends State<MyHomePage> {
 
               const SizedBox(height: 40),
 
+              // Tombol Kurang dan Tambah
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: _decrementCounter,
+                    icon: const Icon(Icons.remove),
+                    label: const Text('Kurang'),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: _incrementCounter,
+                    icon: const Icon(Icons.add),
+                    label: const Text('Tambah'),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 12),
+
+              // Tombol Reset
+              Center(
+                child: SizedBox(
+                  width: 180,
+                  child: ElevatedButton(
+                    onPressed: _resetCounter,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade50,
+                      foregroundColor: Colors.red.shade900,
+                      side: BorderSide(color: Colors.red.shade200),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    child: const Text('Reset'),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
               // Kotak info identitas bawah
               Container(
                 padding: const EdgeInsets.all(12.0),
@@ -137,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(height: 4),
                     const Text(
-                      'Ditampilkan langsung dari kode Dart',
+                      'Aku ganteng',
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                   ],
@@ -147,9 +204,22 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        child: const Icon(Icons.add),
+
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            backgroundColor: Colors.blue.shade100,
+            mini: false,
+            child: const Icon(Icons.add, color: Colors.blue),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'FAB tambah',
+            style: TextStyle(fontSize: 10, color: Colors.grey),
+          ),
+        ],
       ),
     );
   }
